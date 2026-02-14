@@ -10,13 +10,13 @@
 /* Background */
 .container{
   height:100vh;
-  /* display:flex;
+  display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   background-image:url("assets/Soft_pink_abstract_background_with_watercolor.jpg");
-  background-size:cover; */
-   background-color: red;
+  background-size:cover;
+   /* background-color: red; */
 }
 
 
@@ -144,7 +144,7 @@
   }
 }
 .gif{
-  border: 1px solid red;
+ 
   height: 120px;
   width: 120px;
 }

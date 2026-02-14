@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./App.css";
 import { GiRose } from "react-icons/gi";
 import img from "../src/assets/boyimg.png";
 import { useNavigate } from "react-router-dom";
 
-
 function App() {
+  const cardRef = useRef(null);
   const navigate = useNavigate();
   const messages = [
     "Are you sure? 🥺",
@@ -25,15 +25,26 @@ function App() {
   const [message, setMessage] = useState("");
 
   const moveNoButton = () => {
-    // ✅ Show message
+    if (!cardRef.current) return;
+
+    const card = cardRef.current.getBoundingClientRect();
+
+    const btnWidth = 100; // approx button width
+    const btnHeight = 50; // approx button height
+
+    const maxX = card.width - btnWidth - 20;
+    const maxY = card.height - btnHeight - 20;
+
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+
+    // message logic
     if (escapeCount < messages.length) {
       setMessage(messages[escapeCount]);
     } else {
-      setMessage("Haha… you’re stuck with me, Raz. You can’t escape 😏🥱");
-
+      setMessage("Haha… you’re stuck with me, Raz 😏");
     }
 
-    // ✅ Hide behind YES after many escapes
     if (escapeCount > 8) {
       setNoStyle({
         position: "absolute",
@@ -47,10 +58,6 @@ function App() {
       return;
     }
 
-    // ✅ Move randomly INSIDE card
-    const randomX = Math.random() * 250;
-    const randomY = Math.random() * 180;
-
     setNoStyle({
       position: "absolute",
       left: `${randomX}px`,
@@ -59,16 +66,16 @@ function App() {
     });
 
     setEscapeCount((prev) => prev + 1);
-  }
+  };
+
   const handleYes = () => {
     navigate("/success");
   };
 
-
   return (
     <div className="container">
-      <div className="innerdiv">
-        {/* <div className="head">
+      <div className="innerdiv" ref={cardRef}>
+        <div className="head">
           <p className="headpara1">Hello Raz..</p>
 
           <p className="headpara2">
@@ -92,7 +99,7 @@ function App() {
           <button className="nobtn" style={noStyle} onMouseEnter={moveNoButton}>
             No 🥺
           </button>
-        </div> */}
+        </div>
       </div>
 
       {/* ✅ Message BELOW card */}

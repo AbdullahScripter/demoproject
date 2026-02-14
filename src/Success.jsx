@@ -1,19 +1,19 @@
 import React from "react";
 import "./App.css";
 import hugGif from "../src/assets/hug.gif";
-// import confetti from "canvas-confetti";
-// import { useEffect } from "react";
+import confetti from "canvas-confetti";
+import { useEffect } from "react";
 
 
 
 function Success() {
-  // useEffect(() => {
-  //   confetti({
-  //     particleCount: 180,
-  //     spread: 120,
-  //     origin: { y: 0.6 },
-  //   });
-  // }, []);
+  useEffect(() => {
+    confetti({
+      particleCount: 180,
+      spread: 120,
+      origin: { y: 0.6 },
+    });
+  }, []);
 
   return (
     <div className="container">
